@@ -9,6 +9,7 @@
         "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
         "preview": "vite preview",
         "format": "prettier --write .",
+        "format:check": "prettier --check src",
         "test": "vitest --run",
         "test:watch": "vitest"
     },
