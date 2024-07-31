@@ -1,9 +1,17 @@
 import React from "react";
+import axios from "axios";
+
 function App() {
+    const apiBaseURL = import.meta.env.BASE_URL;
+    if (!apiBaseURL) {
+        throw new Error("missing import.meta.env.BASE_URL");
+    }
+
     const [textFieldValues, setTextFieldValues] = React.useState({
         searchValue: "",
         commentValue: "",
     });
+    const [currentSearchResult, setCurrentSearchResult] = React.useState([]);
 
     function handleChangeInTextField(event) {
         const { name, value } = event.target;
@@ -12,6 +20,19 @@ function App() {
             [name]: value,
         }));
     }
+
+    const getMoviesFromSearchQuery = async () => {
+        const searchURL =
+            apiBaseURL +
+            `/movies/search?searchTerm=${textFieldValues.searchValue}`;
+        const newSearchResult = await axios.get(searchURL);
+        console.log(newSearchResult);
+            setCurrentSearchResult(newSearchResult)
+            setTextFieldValues((prevTextFieldValues) => ({
+            ...prevTextFieldValues,
+            searchValue: "",
+        }));
+    };
 
     return (
         <div>
@@ -23,7 +44,7 @@ function App() {
                     value={textFieldValues.searchValue}
                     onChange={handleChangeInTextField}
                 ></input>
-                <button>Search</button>
+                <button onClick={getMoviesFromSearchQuery}>Search</button>
             </div>
             <div className="comments_section">
                 <h3>Our comments on movies</h3>
