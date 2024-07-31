@@ -4,7 +4,7 @@ import axios from "axios";
 function App() {
     const apiBaseURL = import.meta.env.BASE_URL;
     if (!apiBaseURL) {
-        throw new Error("missing import.meta.env.BASE_URL");
+        throw new Error ("missing import.meta.env.BASE_URL");
     }
 
     const [textFieldValues, setTextFieldValues] = React.useState({
