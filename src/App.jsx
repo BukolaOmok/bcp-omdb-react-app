@@ -5,9 +5,8 @@ function App() {
     // @ts-ignore
     const apiBaseURL = import.meta.env.VITE_API_BASE_URL;
     if (!apiBaseURL) {
-        throw new Error("missing import.meta.env.BASE_URL");
+        throw new Error("missing import.meta.env.VITE_API_BASE_URL");
     }
-    console.log(apiBaseURL);
 
     const [textFieldValues, setTextFieldValues] = React.useState({
         searchValue: "",
