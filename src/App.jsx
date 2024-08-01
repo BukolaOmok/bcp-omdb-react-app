@@ -2,10 +2,11 @@ import React from "react";
 import axios from "axios";
 
 function App() {
-    const apiBaseURL = import.meta.env.BASE_URL;
+    const apiBaseURL = import.meta.env.VITE_API_BASE_URL;
     if (!apiBaseURL) {
-        throw new Error ("missing import.meta.env.BASE_URL");
+        throw new Error("missing import.meta.env.BASE_URL");
     }
+    console.log(apiBaseURL)
 
     const [textFieldValues, setTextFieldValues] = React.useState({
         searchValue: "",
@@ -23,12 +24,12 @@ function App() {
 
     const getMoviesFromSearchQuery = async () => {
         const searchURL =
-            apiBaseURL +
+        apiBaseURL +
             `/movies/search?searchTerm=${textFieldValues.searchValue}`;
         const newSearchResult = await axios.get(searchURL);
-        console.log(newSearchResult);
-            setCurrentSearchResult(newSearchResult)
-            setTextFieldValues((prevTextFieldValues) => ({
+        console.log(newSearchResult.data);
+        setCurrentSearchResult(newSearchResult.data);
+        setTextFieldValues((prevTextFieldValues) => ({
             ...prevTextFieldValues,
             searchValue: "",
         }));
