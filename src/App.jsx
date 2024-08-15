@@ -40,7 +40,7 @@ function App() {
             apiBaseURL +
             `/movies/search?searchTerm=${textFieldValues.searchValue}`;
         const newSearchResult = await axios.get(searchURL);
-        // console.log(newSearchResult.data);
+        console.log(newSearchResult.data);
         setCurrentSearchResult(newSearchResult.data);
         setTextFieldValues((prevTextFieldValues) => ({
             ...prevTextFieldValues,
